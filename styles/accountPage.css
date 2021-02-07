@@ -1,0 +1,29 @@
+i{
+  size: 500px;
+}
+.sidebar{
+  width: 500px;
+  height: 500px;
+  background-color: #FFFFFF;
+}
+.img-thumbnail{
+  width: 259px;
+  height: 194px;
+}
+body{
+  overflow: hidden;
+}
+.header{
+  /* max-height: 70px;
+  background-color: #6495ED; */
+  text-align: center;
+  font-weight: bolder;
+  font-size: larger;
+}
+.sidebar{
+  margin-top: 20px;
+  margin-left: 30px;
+}
+.body{
+  display: flex;
+}

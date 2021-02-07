@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login||Register</title>
+	<link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body>
+
+<div class="form-structor">
+	<form class="signup" method="POST" action="http://localhost/IAP/index.php">
+		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+		<div class="form-holder">
+			<input type="text" class="input" placeholder="Name" name="fullName" />
+			<input type="email" class="input" placeholder="Email" name="email" />
+			<input type="text" class="input" placeholder="City of Residence" name="city_of_residence"/>
+			<input type="password" class="input" placeholder="Password" name="password" />
+			<input type="password" class="input" placeholder="Confirm Password" />
+			<input type="hidden" class="input" placeholder="register" name="event" value="register" />
+		</div>
+		<button class="submit-btn">Sign up</button>
+	</form>
+	<form class="login slide-up" method="POST" action="http://localhost/IAP/index.php">
+		<div class="center">
+			<h2 class="form-title" id="login"><span>or</span>Log in</h2>
+			<div class="form-holder">
+				<input type="email" class="input" placeholder="Email" name="email"/>
+				<input type="password" class="input" placeholder="Password" name="password" />
+				<input type="hidden" name="event" value="login">
+			</div>
+			<button class="submit-btn">Log in</button>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="js.js"></script>
