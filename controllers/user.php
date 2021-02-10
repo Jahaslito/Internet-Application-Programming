@@ -2,7 +2,7 @@
 
 include("account.php");
 
- class User implements Account
+ class User 
 {        //properties  
 
     protected $email;
@@ -75,19 +75,64 @@ include("account.php");
             }
             if (password_verify($this->password, $row['password'])) {
                 $_SESSION['email']=$row['email'];
-                return "<h1>Full Name => ".$row['full_name']."</h1>";
+                return true;
             }
-            return "Your username or password is not correct";
+            return "The credentials do not match our records";
         } catch (PDOException $e) {
             return $e->getMessage();
         }
     }
-    public static function logout($pdo){
 
+    public function getData($pdo)
+    {
+        // var_dump($this->email);
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email=?");
+        $stmt->execute([$this->email]);
+        $row = $stmt->fetch();
+        $this->setFullName($row['full_name']);
+        $this->setEmail($row['email']);
+        $this->setCityOfResidence($row['city_of_residence']);
 
     }
-    public function changePassword($pdo,$newPassword,$oldPassword){
+
+    public static function logout(){
+        if ( isset($_SESSION['email']) ) {
+
+            session_unset();
+            header("Location: http://localhost/IAP/Views/login.html");
+            die;
+        }
         
     }
-}
 
+    public function changePassword($pdo, $oldPassword, $newPassword, $confirmPassword){
+       
+       try{
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email=?");
+        $stmt->execute([$this->email]);
+        $row = $stmt->fetch();
+
+        if ( password_verify($oldPassword, $row['password'] ))
+        {
+            if ($newPassword == "" && $confirmPassword == ""){
+                echo "Fill in the new password and comfirm password";
+            }elseif($newPassword != $confirmPassword){
+                echo "Password mismatch";
+            }else{
+                $passwordHash2 = password_hash($newPassword, PASSWORD_DEFAULT);
+                $update = $pdo->prepare("UPDATE users SET password = $passwordHash2 WHERE email = ?");
+                $update->execute([$this->email]);
+            }
+            }else{
+            echo "Wrong old password";
+        }
+        }catch(PDOException $e){
+
+            return $e->getMessage();
+        }
+
+    }
+
+
+}

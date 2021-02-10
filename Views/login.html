@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
 	<title>Login||Register</title>
-	<link rel="stylesheet" type="text/css" href="css.css">
+	<link rel="stylesheet" type="text/css" href="..\styles\css.css">
 </head>
 <body>
 
 <div class="form-structor">
-	<form class="signup" method="POST" action="http://localhost/IAP/index.php">
+	<form class="signup" method="POST" action="..\controllers\index.php">
 		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
 		<div class="form-holder">
 			<input type="text" class="input" placeholder="Name" name="fullName" />
@@ -19,7 +21,7 @@
 		</div>
 		<button class="submit-btn">Sign up</button>
 	</form>
-	<form class="login slide-up" method="POST" action="http://localhost/IAP/index.php">
+	<form class="login slide-up" method="POST" action="..\controllers\index.php">
 		<div class="center">
 			<h2 class="form-title" id="login"><span>or</span>Log in</h2>
 			<div class="form-holder">
@@ -34,4 +36,4 @@
 
 </body>
 </html>
-<script type="text/javascript" src="js.js"></script>
+<script type="text/javascript" src="..\scripts\js.js"></script>

@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+ <?php
+include_once 'user.php';
+include_once 'db.php';
+$con = new DBConnector();
+$pdo = $con->connectToDB();
+  session_start();
+  if (isset($_SESSION['email'])){
+    $email =  $_SESSION['email'];
+    $user = new User($email, "pass");
+   
+  $user->getData($pdo);
+  
+  }else{
+    echo "Session not found!";
+  }
+  
+ ?> 
+ <!DOCTYPE html>
 <html>
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -7,21 +24,26 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="AccountPage.css">
+	<link rel="stylesheet" type="text/css" href="..\styles\accountPage.css">
 </head>
 <body>
 
 <!-- <div class="header">
  --><div class="btn-group" style="align-items: right;">
-  <a type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="left: 1270px; margin-top: 5px; margin-right: 3px; box-shadow: currentColor;">
-  	Hi John
+  <a type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="left: 1245px; margin-top: 5px; margin-right: 3px; box-shadow: currentColor;">
+  	Hi  <?php
+    echo $user->getFullName();
+    ?>
   </a>
   <div class="dropdown-menu">
     <a class="dropdown-item" href="#">Action</a>
     <a class="dropdown-item" href="#">Another action</a>
     <a class="dropdown-item" href="#">Something else here</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item fa fa-sign-out" href="#">Logout</a>
+    <form action="..\controllers\index.php" method="POST">
+    <button class="dropdown-item fa fa-sign-out" type="submit" >Logout</button>
+    <input type="hidden" value="logout" name="event">
+    </form>
   </div>
 </div>
 </div>
@@ -39,12 +61,17 @@
 <div class="sidebar">
 <div class="card" style="width: 18rem;">
   <div class="card-header fa fa-user">
-     John Doe
+   <?php
+    echo $user->getFullName();
+    ?> 
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item fa fa-shopping-cart"> Orders</li>
     <li class="list-group-item fa fa-money"> Payment</li>
-    <li class="list-group-item fa fa-sign-out">Logout</li>
+    <form action="..\controllers\index.php" method="POST">
+    <input type="hidden" value="logout" name="event">
+    <button class="list-group-item fa fa-sign-out">Logout</button>
+    </form>
   </ul>
 </div>
 </div>
@@ -67,7 +94,7 @@
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          John Doe
+                          <?php echo $user->getFullName()?>
                         </div>
                       </div>
                       <hr>
@@ -76,7 +103,7 @@
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          johndoe@lost.com
+                          <?php echo $user->getEmail()?>
                         </div>
                       </div>
                       <hr>
@@ -94,7 +121,7 @@
                           <h6 class="mb-0">City Of Residence</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          Atlantis
+                          <?php echo $user->getCityOfResidence()?>
                         </div>
                       </div>
                     </div>
@@ -112,26 +139,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="index.php" method="POST">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Old Password:</label>
-            <input type="Password" class="form-control" id="recipient-name">
+            <input type="Password" class="form-control" id="recipient-name" name="oldPassword">
           </div>
+          <input type="hidden" value="changePassword" name="event">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">New Password:</label>
-            <input type="Password" class="form-control" id="recipient-name">
+            <input type="Password" class="form-control" id="recipient-name" name="newPassword">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Confirm Password:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <input type="Password" class="form-control" id="recipient-name" name="conffirmPassword">
           </div>
          
-        </form>
-      </div>
-      <div class="modal-footer">
+          <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Change password</button>
       </div>
+        </form>
+      </div>
+     
     </div>
   </div>
 </div>
