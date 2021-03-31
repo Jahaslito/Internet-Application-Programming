@@ -5,28 +5,29 @@
 	<meta content="utf-8" http-equiv="encoding">
 	<title>Login||Register</title>
 	<link rel="stylesheet" type="text/css" href="..\styles\css.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
 <div class="form-structor">
-	<form class="signup" method="POST" action="..\controllers\index.php">
+	<form class="signup" method="POST" >
 		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
 		<div class="form-holder">
 			<input type="text" class="input" placeholder="Name" name="fullName" />
 			<input type="email" class="input" placeholder="Email" name="email" />
 			<input type="text" class="input" placeholder="City of Residence" name="city_of_residence"/>
 			<input type="password" class="input" placeholder="Password" name="password" />
-			<input type="password" class="input" placeholder="Confirm Password" />
+			<input type="password" class="input" placeholder="Confirm Password" name="confirmPassword" />
 			<input type="hidden" class="input" placeholder="register" name="event" value="register" />
 		</div>
 		<button class="submit-btn">Sign up</button>
 	</form>
-	<form class="login slide-up" method="POST" action="..\controllers\index.php">
+	<form class="login slide-up" onSubmit="login">
 		<div class="center">
 			<h2 class="form-title" id="login"><span>or</span>Log in</h2>
 			<div class="form-holder">
-				<input type="email" class="input" placeholder="Email" name="email"/>
-				<input type="password" class="input" placeholder="Password" name="password" />
+				<input type="email" class="input" placeholder="Email" name="email" id= "email"/>
+				<input type="password" class="input" placeholder="Password" name="password" id="password"/>
 				<input type="hidden" name="event" value="login">
 			</div>
 			<button class="submit-btn">Log in</button>
@@ -34,6 +35,43 @@
 	</form>
 </div>
 
+<h1 id = "message" style="font-size: larger; color: red;"> </h1>
+
+
+<script>
+// 	$(document).ready(function(){
+//     $("#submit-btn").click(function(e){
+//        // e.preventDefault();
+//         var username = $("#email").val().trim();
+//         var password = $("#password").val().trim();
+//         console.log("Working");
+//         if( username != "" && password != "" ){
+//             $.ajax({
+//                 url:'..\controllers\index.php',
+//                 type:'post',
+//                 data:{username:username,password:password},
+//                 success:function(response){
+//                     console.log(data);
+//                     var msg = "";
+//                     if(response == 1){
+//                         window.location = "accountPage.php";
+//                     }else{
+//                         msg = "Invalid username and password!";
+//                         console.log("Working with wrong creds");
+//                     }
+//                     $("#message").html(msg);
+//                     console.log(response);
+//                 }
+//             });
+//         }
+//     });
+// });
+//setTimeout(5000);
+
+</script>
+<script type="text/javascript" src="..\scripts\js.js"></script>
+<script type="text/javascript" src="..\scripts\login.js"></script>
 </body>
 </html>
-<script type="text/javascript" src="..\scripts\js.js"></script>
+
+
