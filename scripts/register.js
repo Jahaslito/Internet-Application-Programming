@@ -75,7 +75,7 @@ function register(form){
             }
         }
     }
-    ajax.open("POST","index.php");
+    ajax.open("POST","..\controllers\index.php");
     ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     ajax.send("fullName="+form.fullName.value+"&password="+form.password.value+"email="+form.email.value+"city_of_residence="+form.city_of_residence.value);		
 }

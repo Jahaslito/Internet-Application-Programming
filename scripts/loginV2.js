@@ -42,7 +42,7 @@ function login(form){
             }
         }
     }
-    ajax.open("POST","index.php");
+    ajax.open("POST","..\controllers\index.php");
     ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     ajax.send("email="+form.email.value+"&password="+form.password.value);
 }
